@@ -62,6 +62,10 @@ interface IAppearanceProps {
   readonly onShowCompareTabChanged: (show: boolean) => void
   readonly showConventionalCommitBadges: boolean
   readonly onShowConventionalCommitBadgesChanged: (show: boolean) => void
+  readonly normalizeConventionalCommitBadges: boolean
+  readonly onNormalizeConventionalCommitBadgesChanged: (
+    normalize: boolean
+  ) => void
   readonly showBranchNameInRepoList: ShowBranchNameInRepoListSetting
   readonly onShowBranchNameInRepoListChanged: (
     value: ShowBranchNameInRepoListSetting
@@ -90,6 +94,7 @@ interface IAppearanceState {
   readonly showWorktreesInRepoList: boolean
   readonly showCompareTab: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
 }
 
 function getTitleBarStyleDescription(titleBarStyle: TitleBarStyle): string {
@@ -129,6 +134,8 @@ export class Appearance extends React.Component<
       showWorktreesInRepoList: props.showWorktreesInRepoList,
       showCompareTab: props.showCompareTab,
       showConventionalCommitBadges: props.showConventionalCommitBadges,
+      normalizeConventionalCommitBadges:
+        props.normalizeConventionalCommitBadges,
     }
 
     if (!usePropTheme) {
@@ -166,6 +173,8 @@ export class Appearance extends React.Component<
       showWorktreesInRepoList: this.props.showWorktreesInRepoList,
       showCompareTab: this.props.showCompareTab,
       showConventionalCommitBadges: this.props.showConventionalCommitBadges,
+      normalizeConventionalCommitBadges:
+        this.props.normalizeConventionalCommitBadges,
     })
 
     if (
@@ -238,6 +247,14 @@ export class Appearance extends React.Component<
     const show = event.currentTarget.checked
     this.setState({ showConventionalCommitBadges: show })
     this.props.onShowConventionalCommitBadgesChanged(show)
+  }
+
+  private onNormalizeConventionalCommitBadgesChanged = (
+    event: React.FormEvent<HTMLInputElement>
+  ) => {
+    const normalize = event.currentTarget.checked
+    this.setState({ normalizeConventionalCommitBadges: normalize })
+    this.props.onNormalizeConventionalCommitBadgesChanged(normalize)
   }
 
   private onSelectedTabSizeChanged = (
@@ -530,6 +547,16 @@ export class Appearance extends React.Component<
                 : CheckboxValue.Off
             }
             onChange={this.onShowConventionalCommitBadgesChanged}
+          />
+
+          <Checkbox
+            label="Normalize capitalization of Conventional Commits badges"
+            value={
+              this.state.normalizeConventionalCommitBadges
+                ? CheckboxValue.On
+                : CheckboxValue.Off
+            }
+            onChange={this.onNormalizeConventionalCommitBadgesChanged}
           />
         </div>
       </>

@@ -59,6 +59,11 @@ interface ICommitProps {
    * badge instead of plain text.
    */
   readonly showConventionalCommitBadges: boolean
+  /**
+   * Whether conventional commit badges have their capitalization normalized
+   * to title-case.
+   */
+  readonly normalizeConventionalCommitBadges: boolean
 }
 
 interface ICommitListItemState {
@@ -186,7 +191,9 @@ export class CommitListItem extends React.PureComponent<
 
   private renderSummary(commitSummary: string, summaryClassNames: string) {
     const parsed = this.props.showConventionalCommitBadges
-      ? parseConventionalCommit(commitSummary)
+      ? parseConventionalCommit(commitSummary, {
+          normalize: this.props.normalizeConventionalCommitBadges,
+        })
       : null
 
     const richText = (

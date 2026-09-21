@@ -609,6 +609,9 @@ const showCompareTabKey = 'show-compare-tab'
 const showCompareTabDefault = true
 const showConventionalCommitBadgesKey = 'show-conventional-commit-badges'
 const showConventionalCommitBadgesDefault = true
+const normalizeConventionalCommitBadgesKey =
+  'normalize-conventional-commit-badges'
+const normalizeConventionalCommitBadgesDefault = true
 const repositoryIndicatorsEnabledKey = 'enable-repository-indicators'
 
 // background fetching should occur hourly when Desktop is active, but this
@@ -804,6 +807,8 @@ export class AppStore extends TypedBaseStore<IAppState> {
   private showCompareTab: boolean = showCompareTabDefault
   private showConventionalCommitBadges: boolean =
     showConventionalCommitBadgesDefault
+  private normalizeConventionalCommitBadges: boolean =
+    normalizeConventionalCommitBadgesDefault
   private hideWindowOnQuit: boolean = __DARWIN__
 
   private useWindowsOpenSSH: boolean = false
@@ -944,6 +949,10 @@ export class AppStore extends TypedBaseStore<IAppState> {
     this.showConventionalCommitBadges = getBoolean(
       showConventionalCommitBadgesKey,
       showConventionalCommitBadgesDefault
+    )
+    this.normalizeConventionalCommitBadges = getBoolean(
+      normalizeConventionalCommitBadgesKey,
+      normalizeConventionalCommitBadgesDefault
     )
 
     this.repositoryIndicatorUpdater = new RepositoryIndicatorUpdater(
@@ -1503,6 +1512,7 @@ export class AppStore extends TypedBaseStore<IAppState> {
       showWorktreesInRepoList: this.showWorktreesInRepoList,
       showCompareTab: this.showCompareTab,
       showConventionalCommitBadges: this.showConventionalCommitBadges,
+      normalizeConventionalCommitBadges: this.normalizeConventionalCommitBadges,
       apiRepositories: this.apiRepositoriesStore.getState(),
       useWindowsOpenSSH: this.useWindowsOpenSSH,
       showCommitLengthWarning: this.showCommitLengthWarning,
@@ -5117,6 +5127,23 @@ export class AppStore extends TypedBaseStore<IAppState> {
     }
     setBoolean(showConventionalCommitBadgesKey, showConventionalCommitBadges)
     this.showConventionalCommitBadges = showConventionalCommitBadges
+    this.emitUpdate()
+  }
+
+  public _setNormalizeConventionalCommitBadges(
+    normalizeConventionalCommitBadges: boolean
+  ) {
+    if (
+      this.normalizeConventionalCommitBadges ===
+      normalizeConventionalCommitBadges
+    ) {
+      return
+    }
+    setBoolean(
+      normalizeConventionalCommitBadgesKey,
+      normalizeConventionalCommitBadges
+    )
+    this.normalizeConventionalCommitBadges = normalizeConventionalCommitBadges
     this.emitUpdate()
   }
 

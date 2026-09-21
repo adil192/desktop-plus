@@ -224,6 +224,12 @@ interface ICommitListProps {
    */
   readonly showConventionalCommitBadges: boolean
 
+  /**
+   * Whether conventional commit badges have their capitalization normalized
+   * to title-case.
+   */
+  readonly normalizeConventionalCommitBadges: boolean
+
   /** This will make the list semantics friendly to screen reader users in browse mode. */
   readonly isInformationalView?: boolean
 
@@ -383,6 +389,9 @@ export class CommitList extends React.Component<
         dragSourceBranch={this.props.dragSourceBranch}
         preferAbsoluteDates={this.props.preferAbsoluteDates}
         showConventionalCommitBadges={this.props.showConventionalCommitBadges}
+        normalizeConventionalCommitBadges={
+          this.props.normalizeConventionalCommitBadges
+        }
       />
     )
   }
@@ -738,6 +747,8 @@ export class CommitList extends React.Component<
             preferAbsoluteDates: this.props.preferAbsoluteDates,
             showConventionalCommitBadges:
               this.props.showConventionalCommitBadges,
+            normalizeConventionalCommitBadges:
+              this.props.normalizeConventionalCommitBadges,
             additionalInvalidationProps: this.props.additionalInvalidationProps,
           }}
           setScrollTop={this.props.compareListScrollTop}

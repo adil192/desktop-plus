@@ -83,6 +83,7 @@ interface ICommitGraphSidebarProps {
   readonly accounts: ReadonlyArray<Account>
   readonly preferAbsoluteDates: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
 }
 
 interface ICommitGraphSidebarState {
@@ -842,6 +843,9 @@ export class CommitGraphSidebar extends React.Component<
         accounts={this.props.accounts}
         preferAbsoluteDates={this.props.preferAbsoluteDates}
         showConventionalCommitBadges={this.props.showConventionalCommitBadges}
+        normalizeConventionalCommitBadges={
+          this.props.normalizeConventionalCommitBadges
+        }
         commitGraphRowHeight={
           commitGraphIsTreeMode ? commitGraph_RowHeight : undefined
         }
@@ -888,6 +892,9 @@ export class CommitGraphSidebar extends React.Component<
         unpushedIndicatorTitle={props.unpushedIndicatorTitle}
         preferAbsoluteDates={this.props.preferAbsoluteDates}
         showConventionalCommitBadges={this.props.showConventionalCommitBadges}
+        normalizeConventionalCommitBadges={
+          this.props.normalizeConventionalCommitBadges
+        }
         currentBranch={this.props.currentBranch}
         currentTipSha={this.props.currentTipSha}
         gitHubRepository={this.props.repository.gitHubRepository}

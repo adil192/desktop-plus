@@ -29,6 +29,7 @@ interface ICommitGraphCommitListItemProps {
   readonly unpushedIndicatorTitle?: string
   readonly preferAbsoluteDates: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
   readonly currentBranch: Branch | null
   readonly currentTipSha: string | null
   readonly gitHubRepository: GitHubRepository | null
@@ -53,13 +54,22 @@ interface ICommitGraphSummaryProps {
   readonly emoji: Map<string, Emoji>
   readonly text: string
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
 }
 
 class CommitGraphSummary extends React.PureComponent<ICommitGraphSummaryProps> {
   public render() {
-    const { className, emoji, text, showConventionalCommitBadges } = this.props
+    const {
+      className,
+      emoji,
+      text,
+      showConventionalCommitBadges,
+      normalizeConventionalCommitBadges,
+    } = this.props
     const parsed = showConventionalCommitBadges
-      ? parseConventionalCommit(text)
+      ? parseConventionalCommit(text, {
+          normalize: normalizeConventionalCommitBadges,
+        })
       : null
 
     return (
@@ -113,6 +123,9 @@ export class CommitGraphCommitListItem extends React.PureComponent<ICommitGraphC
               text={commitSummary}
               showConventionalCommitBadges={
                 this.props.showConventionalCommitBadges
+              }
+              normalizeConventionalCommitBadges={
+                this.props.normalizeConventionalCommitBadges
               }
             />
           </div>

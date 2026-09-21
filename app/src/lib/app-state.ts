@@ -366,6 +366,12 @@ export interface IAppState {
   readonly showConventionalCommitBadges: boolean
 
   /**
+   * Whether conventional commit badges have their capitalization normalized
+   * to title-case.
+   */
+  readonly normalizeConventionalCommitBadges: boolean
+
+  /**
    * A map keyed on a user account (GitHub.com or GitHub Enterprise)
    * containing an object with repositories that the authenticated
    * user has explicit permission (:read, :write, or :admin) to access

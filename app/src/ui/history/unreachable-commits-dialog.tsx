@@ -124,6 +124,7 @@ export class UnreachableCommitsDialog extends React.Component<
             onCommitsSelected={this.onCommitsSelected}
             accounts={this.props.accounts}
             showConventionalCommitBadges={false}
+            normalizeConventionalCommitBadges={false}
             isInformationalView={true}
             preferAbsoluteDates={this.props.preferAbsoluteDates}
           />

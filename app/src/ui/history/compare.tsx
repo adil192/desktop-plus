@@ -68,6 +68,7 @@ interface ICompareSidebarProps {
   readonly accounts: ReadonlyArray<Account>
   readonly preferAbsoluteDates: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
 }
 interface ICompareSidebarState {
   /**
@@ -348,6 +349,9 @@ export class CompareSidebar extends React.Component<
         dragSourceBranch={dragSourceBranch}
         preferAbsoluteDates={this.props.preferAbsoluteDates}
         showConventionalCommitBadges={this.props.showConventionalCommitBadges}
+        normalizeConventionalCommitBadges={
+          this.props.normalizeConventionalCommitBadges
+        }
       />
     )
   }

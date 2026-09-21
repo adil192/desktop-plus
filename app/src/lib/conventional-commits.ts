@@ -86,7 +86,8 @@ export interface IConventionalCommit {
  * because it runs on the render path of the commit list.
  */
 export function parseConventionalCommit(
-  summary: string
+  summary: string,
+  { normalize }: { normalize: boolean }
 ): IConventionalCommit | null {
   const matcher = conventionalCommitPattern.matcher(summary)
 
@@ -101,7 +102,9 @@ export function parseConventionalCommit(
 
   // The Conventional Commits spec allows any casing for the type, normalise to lower case
   const rawType = matchedType.toLowerCase()
-  const baseLabel = conventionalCommitLabelsByType.get(rawType) ?? matchedType
+  const baseLabel = normalize
+    ? conventionalCommitLabelsByType.get(rawType) ?? matchedType
+    : matchedType
 
   const isBreaking = matcher.group(4) !== null
 

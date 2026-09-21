@@ -132,6 +132,7 @@ interface IPreferencesProps {
   readonly showWorktreesInRepoList: boolean
   readonly showCompareTab: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
   readonly repositoryIndicatorsEnabled: boolean
   readonly showBranchNameInRepoList: ShowBranchNameInRepoListSetting
   readonly branchSortOrder: BranchSortOrder
@@ -189,6 +190,7 @@ interface IPreferencesState {
   readonly showWorktreesInRepoList: boolean
   readonly showCompareTab: boolean
   readonly showConventionalCommitBadges: boolean
+  readonly normalizeConventionalCommitBadges: boolean
   /**
    * If unable to save Git configuration values (name, email)
    * due to an existing configuration lock file this property
@@ -290,6 +292,8 @@ export class Preferences extends React.Component<
       showWorktreesInRepoList: this.props.showWorktreesInRepoList,
       showCompareTab: this.props.showCompareTab,
       showConventionalCommitBadges: this.props.showConventionalCommitBadges,
+      normalizeConventionalCommitBadges:
+        this.props.normalizeConventionalCommitBadges,
       repositoryIndicatorsEnabled: this.props.repositoryIndicatorsEnabled,
       showBranchNameInRepoList: this.props.showBranchNameInRepoList,
       branchSortOrder: this.props.branchSortOrder,
@@ -783,6 +787,12 @@ export class Preferences extends React.Component<
             onShowConventionalCommitBadgesChanged={
               this.onShowConventionalCommitBadgesChanged
             }
+            normalizeConventionalCommitBadges={
+              this.state.normalizeConventionalCommitBadges
+            }
+            onNormalizeConventionalCommitBadgesChanged={
+              this.onNormalizeConventionalCommitBadgesChanged
+            }
             showBranchNameInRepoList={this.state.showBranchNameInRepoList}
             onShowBranchNameInRepoListChanged={
               this.onShowBranchNameInRepoListChanged
@@ -1196,6 +1206,12 @@ export class Preferences extends React.Component<
     this.setState({ showConventionalCommitBadges })
   }
 
+  private onNormalizeConventionalCommitBadgesChanged = (
+    normalizeConventionalCommitBadges: boolean
+  ) => {
+    this.setState({ normalizeConventionalCommitBadges })
+  }
+
   private renderFooter() {
     const hasDisabledError = this.state.disallowedCharactersMessage != null
 
@@ -1299,6 +1315,15 @@ export class Preferences extends React.Component<
       ) {
         dispatcher.setShowConventionalCommitBadges(
           this.state.showConventionalCommitBadges
+        )
+      }
+
+      if (
+        this.state.normalizeConventionalCommitBadges !==
+        this.props.normalizeConventionalCommitBadges
+      ) {
+        dispatcher.setNormalizeConventionalCommitBadges(
+          this.state.normalizeConventionalCommitBadges
         )
       }
 

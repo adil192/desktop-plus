@@ -3380,6 +3380,14 @@ export class Dispatcher {
     this.appStore._setShowConventionalCommitBadges(showConventionalCommitBadges)
   }
 
+  public setNormalizeConventionalCommitBadges(
+    normalizeConventionalCommitBadges: boolean
+  ) {
+    this.appStore._setNormalizeConventionalCommitBadges(
+      normalizeConventionalCommitBadges
+    )
+  }
+
   public setHideWindowOnQuit(hideWindowOnQuit: boolean) {
     this.appStore._setHideWindowOnQuit(hideWindowOnQuit)
   }

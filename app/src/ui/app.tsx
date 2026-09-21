@@ -1981,6 +1981,9 @@ export class App extends React.Component<IAppProps, IAppState> {
             showConventionalCommitBadges={
               this.state.showConventionalCommitBadges
             }
+            normalizeConventionalCommitBadges={
+              this.state.normalizeConventionalCommitBadges
+            }
             repositoryIndicatorsEnabled={this.state.repositoryIndicatorsEnabled}
             hideWindowOnQuit={this.state.hideWindowOnQuit}
             onEditGlobalGitConfig={this.editGlobalGitConfig}
@@ -4401,6 +4404,9 @@ export class App extends React.Component<IAppProps, IAppState> {
           showDiffCheckMarks={state.showDiffCheckMarks}
           preferAbsoluteDates={state.preferAbsoluteDates}
           showConventionalCommitBadges={state.showConventionalCommitBadges}
+          normalizeConventionalCommitBadges={
+            state.normalizeConventionalCommitBadges
+          }
           showSideBySideDiff={state.showSideBySideDiff}
           showDiffMinimap={state.showDiffMinimap}
           wrapDiffLines={state.wrapDiffLines}

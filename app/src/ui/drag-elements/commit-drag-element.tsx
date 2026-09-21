@@ -192,6 +192,7 @@ export class CommitDragElement extends React.Component<
             showUnpushedIndicator={false}
             accounts={this.props.accounts}
             showConventionalCommitBadges={false}
+            normalizeConventionalCommitBadges={false}
             preferAbsoluteDates={false}
           />
         </div>
